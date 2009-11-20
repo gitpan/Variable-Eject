@@ -4,6 +4,7 @@ author:
   - 'Mons Anderson <mons@cpan.org>'
 build_requires:
   ExtUtils::MakeMaker: 6.42
+  Test::If: 0
   Test::More: 0
   lib::abs: 0.90
 configure_requires:
@@ -22,7 +23,7 @@ no_index:
 provides:
   Variable::Eject:
     file: lib/Variable/Eject.pm
-    version: 0.01
+    version: 0.02
 requires:
   Devel::Declare: 0.005011
   Lexical::Alias: 0.04
@@ -30,4 +31,4 @@ requires:
   uni::perl: 0.03
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.01
+version: 0.02

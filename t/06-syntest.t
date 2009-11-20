@@ -8,7 +8,7 @@ use Variable::Eject;
 
 my $hash = { scalar => 'scalar value' };
 
-eject( $hash => ${scalar} );
+eject( $hash => $ { scalar } );
 
 is $scalar, 'scalar value', 'scalar ejected';
 $scalar .= ' modified';

@@ -2,7 +2,7 @@ NAME
     Variable::Eject - Eject variables from hash to current namespace
 
 VERSION
-    Version 0.01
+    Version 0.02
 
 SYNOPSIS
         use Variable::Eject;

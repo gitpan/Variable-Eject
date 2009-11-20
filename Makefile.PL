@@ -3,13 +3,14 @@ use inc::Module::Install;
 
 name     'Variable-Eject';
 all_from 'lib/Variable/Eject.pm';
-version   my $v = '0.01';
+version   my $v = '0.02';
 author   'Mons Anderson <mons@cpan.org>';
 license  'perl';
 
 perl_version 5.010;
 
 build_requires 'lib::abs' => '0.90';
+build_requires 'Test::If';
 build_requires 'Test::More';
 
 requires 'uni::perl'      => '0.03';

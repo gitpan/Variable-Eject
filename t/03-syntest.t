@@ -2,7 +2,8 @@
 
 use uni::perl;
 use Test::More skip_all => 'TODO: unimplemented syn';
-use Test::More tests => 2;
+use Test::More tests => 3;
+use Test::NoWarnings;
 use lib::abs '../lib';
 use Variable::Eject;
 

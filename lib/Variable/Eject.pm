@@ -6,11 +6,11 @@ Variable::Eject - Eject variables from hash to current namespace
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 SYNOPSIS
 
@@ -111,17 +111,20 @@ sub process {
 	#warn "Have args $args: $from => [ @args ]";
 	my $inj;
 	for (@args) {
-		s{^\s+|\s+$}{}sg;
+		#warn "arg = >$_<\n";
+		s{(?:^\s+|\s+$)}{}sg; # ' $var ' => '$var'
 		my $type = substr($_,0,1,'');
-		$_ = '{'.$_.'}' unless m/^\{.+\}$/;
-		#warn "Var is : $_";
+		s{^\s+}{}s; # ' { var } ' => '{ var }'
+		s{^\s*\{?\s*|\s*\}?\s*$}{}sg;
+		#$_ = '{'.$_.'}' unless m/^\{.+\}$/;
 		if ($type eq '$') {
-			#$inj .= 'Lexical::Alias::alias( '.$from.'->{'.$_.'} => my $'.$_.' );';
-			$inj .= 'Lexical::Alias::alias( '.$from.'->'.$_.' => my $'.$_.' );';
+			$inj .= 'Lexical::Alias::alias( '.$from.'->{'.$_.'} => my $'.$_.' );';
+			#$inj .= 'Lexical::Alias::alias( '.$from.'->'.$_.' => my $'.$_.' );';
 		} else {
-			#$inj .= 'Lexical::Alias::alias( '.$type.'{'.$from.'->{'.$_.'}} => my '.$type.$_.' );';
-			$inj .= 'Lexical::Alias::alias( '.$type.'{'.$from.'->'.$_.'} => my '.$type.$_.' );';
+			$inj .= 'Lexical::Alias::alias( '.$type.'{'.$from.'->{'.$_.'}} => my '.$type.$_.' );';
+			#$inj .= 'Lexical::Alias::alias( '.$type.'{'.$from.'->'.$_.'} => my '.$type.$_.' );';
 		}
+		#warn "$inj";
 	}
 	$self->whereami if DEBUG;
 	$self->inject("() if 0; $inj");

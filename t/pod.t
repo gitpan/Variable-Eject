@@ -14,3 +14,5 @@ eval "use Test::Pod 1.22; 1"
 
 all_pod_files_ok();
 exit;
+require Test::NoWarnings;
+
